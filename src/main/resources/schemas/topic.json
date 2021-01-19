@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "performAssessmentResponse",
+  "additionalProperties": false,
+  "properties": {
+    "eventData": {
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "type": "string"
+        },
+        "responseStatus": {
+          "type": "string",
+          "enum": [
+            "success",
+            "businessError",
+            "systemError"
+          ]
+        },
+        "eventType": {
+          "type": "string",
+          "enum": [
+            "ecePerformAssessmentResponse"
+          ]
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "assessmentCaseId": {
+              "type": "string"
+            },
+            "exceptions": {
+              "type": "array",
+              "additionalItems": true,
+              "uniqueItems": false,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "exceptionType": {
+                    "type": "string"
+                  },
+                  "exceptionCategory": {
+                    "type": "string"
+                  },
+                  "exceptionCode": {
+                    "type": "string"
+                  },
+                  "exceptionSource": {
+                    "type": "string"
+                  },
+                  "exceptionDescription": {
+                    "type": "string"
+                  },
+                  "exceptionOtherData": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "exceptionType",
+                  "exceptionCategory",
+                  "exceptionCode",
+                  "exceptionSource",
+                  "exceptionDescription",
+                  "exceptionOtherData"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "required": [
+                "assessmentCaseId"
+              ]
+            },
+            {
+              "required": [
+                "exceptions"
+              ]
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "correlationId",
+        "responseStatus",
+        "eventType",
+        "payload"
+      ]
+    }
+  },
+  "required": [
+    "eventData"
+  ]
+}
